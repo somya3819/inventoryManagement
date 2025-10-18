@@ -1,13 +1,13 @@
-package com.inventorymanagement.web_service;
+package com.example.inventory;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WebServiceApplication {
+public class ProjectApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WebServiceApplication.class, args);
+		SpringApplication.run(ProjectApplication.class, args);
 	}
 
 }
