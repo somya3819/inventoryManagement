@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Delete Item</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+</head>
+<body class="p-4">
+  <div class="container">
+    <h1>Delete Item</h1>
+    <div class="alert alert-warning">
+      Are you sure you want to delete the item <strong th:text="${item.name}"></strong> (ID: <span th:text="${item.id}"></span>)?
+    </div>
+    <form th:action="@{'/web/items/delete/' + ${item.id}}" method="post" class="d-inline">
+      <button class="btn btn-danger" type="submit">Yes, Delete</button>
+    </form>
+    <a class="btn btn-secondary" href="/web/items">Cancel</a>
+  </div>
+</body>
+</html>

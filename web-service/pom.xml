@@ -20,21 +20,7 @@
 
     <properties>
         <java.version>17</java.version>
-        <spring-cloud.version>2023.0.4</spring-cloud.version>
     </properties>
-
-    <!-- Import Spring Cloud BOM -->
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <!-- Validation -->
@@ -53,11 +39,7 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-        <!-- Feign client for calling inventory-service -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
+        <!-- Using RestTemplate for backend calls; no Spring Cloud needed -->
 
         <!-- Devtools (runtime only) -->
         <dependency>
