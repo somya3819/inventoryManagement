@@ -1,13 +1,9 @@
 package com.inventorymanagement.web_service;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-public class WebServiceApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(WebServiceApplication.class, args);
-	}
-
+/**
+ * Legacy placeholder retained to avoid breaking imports.
+ * Not a Spring Boot application and contains no entry point.
+ */
+class LegacyWebServiceApplication {
+    // no-op
 }

@@ -1,13 +1,9 @@
 package com.example.inventory_service;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-public class InventoryServiceApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(InventoryServiceApplication.class, args);
-	}
-
+/**
+ * Legacy placeholder class retained from an earlier package structure.
+ * Intentionally has no main method and no Spring annotations.
+ */
+class InventoryServiceApplication {
+    // no-op
 }
