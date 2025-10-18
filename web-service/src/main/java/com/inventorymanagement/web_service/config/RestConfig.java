@@ -1,4 +1,4 @@
-package com.example.inventory.config;
+package com.inventorymanagement.web_service.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

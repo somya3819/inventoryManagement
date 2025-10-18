@@ -1,6 +1,6 @@
-package com.example.inventory.controller;
+package com.inventorymanagement.web_service.controller;
 
-import com.example.inventory.model.Item;
+import com.inventorymanagement.web_service.model.Item;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -17,9 +17,11 @@ public class WebController {
     private final RestTemplate rest;
     private final String inventoryBase;
 
-    public WebController(RestTemplate rest, @Value("${inventory.service.url:http://localhost:8081}") String inventoryBase) {
+    public WebController(RestTemplate rest,
+            @Value("${inventory.service.url:http://localhost:8081}") String inventoryBase) {
         this.rest = rest;
-        this.inventoryBase = inventoryBase.endsWith("/") ? inventoryBase.substring(0, inventoryBase.length() - 1) : inventoryBase;
+        this.inventoryBase = inventoryBase.endsWith("/") ? inventoryBase.substring(0, inventoryBase.length() - 1)
+                : inventoryBase;
     }
 
     // List all items
@@ -27,7 +29,8 @@ public class WebController {
     public String listItems(Model model) {
         try {
             Item[] items = rest.getForObject(inventoryBase + "/api/items", Item[].class);
-            model.addAttribute("items", items != null ? java.util.Arrays.asList(items) : java.util.Collections.emptyList());
+            model.addAttribute("items",
+                    items != null ? java.util.Arrays.asList(items) : java.util.Collections.emptyList());
         } catch (Exception e) {
             model.addAttribute("items", java.util.Collections.emptyList());
             model.addAttribute("error", "Unable to fetch items from inventory service.");
@@ -53,12 +56,14 @@ public class WebController {
 
             // reload list so page shows items + error
             Item[] items = rest.getForObject(inventoryBase + "/api/items", Item[].class);
-            model.addAttribute("items", items != null ? java.util.Arrays.asList(items) : java.util.Collections.emptyList());
+            model.addAttribute("items",
+                    items != null ? java.util.Arrays.asList(items) : java.util.Collections.emptyList());
             return "items";
         } catch (Exception ex) {
             model.addAttribute("error", "Unexpected error: " + ex.getMessage());
             Item[] items = rest.getForObject(inventoryBase + "/api/items", Item[].class);
-            model.addAttribute("items", items != null ? java.util.Arrays.asList(items) : java.util.Collections.emptyList());
+            model.addAttribute("items",
+                    items != null ? java.util.Arrays.asList(items) : java.util.Collections.emptyList());
             return "items";
         }
     }
