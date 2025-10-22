@@ -8,15 +8,15 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <style>
     :root {
-      --primary-color: #4f46e5;
-      --secondary-color: #06b6d4;
-      --success-color: #10b981;
+      --mint-green: #B8D8BA;
+      --sage-blue: #A6B6B4;
+      --dark-navy: #1A1D23;
+      --golden-yellow: #C9B963;
       --danger-color: #ef4444;
-      --dark-bg: #1f2937;
       --light-bg: #f9fafb;
     }
     body {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, var(--mint-green) 0%, var(--sage-blue) 100%);
       min-height: 100vh;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
@@ -29,7 +29,7 @@
       overflow: hidden;
     }
     .header-section {
-      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      background: linear-gradient(135deg, var(--dark-navy) 0%, #2a2d35 100%);
       color: white;
       padding: 2.5rem;
       margin-bottom: 0;
@@ -69,19 +69,22 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
     .btn-add {
-      background: linear-gradient(135deg, var(--success-color) 0%, #059669 100%);
+      background: linear-gradient(135deg, var(--mint-green) 0%, #a3c9a5 100%);
       border: none;
-      color: white;
+      color: var(--dark-navy);
+      font-weight: 700;
     }
     .btn-refresh {
-      background: linear-gradient(135deg, var(--secondary-color) 0%, #0891b2 100%);
+      background: linear-gradient(135deg, var(--sage-blue) 0%, #96a6a4 100%);
       border: none;
-      color: white;
+      color: var(--dark-navy);
+      font-weight: 700;
     }
     .btn-search {
-      background: linear-gradient(135deg, var(--primary-color) 0%, #4338ca 100%);
+      background: linear-gradient(135deg, var(--golden-yellow) 0%, #b9a953 100%);
       border: none;
-      color: white;
+      color: var(--dark-navy);
+      font-weight: 700;
     }
     .table-container {
       background: white;
@@ -93,7 +96,7 @@
       margin: 0;
     }
     .table thead {
-      background: linear-gradient(135deg, var(--dark-bg) 0%, #374151 100%);
+      background: linear-gradient(135deg, var(--dark-navy) 0%, #2a2d35 100%);
       color: white;
     }
     .table thead th {
@@ -117,18 +120,18 @@
       border-bottom: 1px solid #e5e7eb;
     }
     .badge-qty {
-      background: linear-gradient(135deg, var(--secondary-color) 0%, #0891b2 100%);
-      color: white;
+      background: linear-gradient(135deg, var(--sage-blue) 0%, #96a6a4 100%);
+      color: var(--dark-navy);
       padding: 0.5rem 1rem;
       border-radius: 20px;
-      font-weight: 600;
+      font-weight: 700;
     }
     .badge-price {
-      background: linear-gradient(135deg, var(--success-color) 0%, #059669 100%);
-      color: white;
+      background: linear-gradient(135deg, var(--golden-yellow) 0%, #b9a953 100%);
+      color: var(--dark-navy);
       padding: 0.5rem 1rem;
       border-radius: 20px;
-      font-weight: 600;
+      font-weight: 700;
     }
     .btn-action {
       padding: 0.5rem 1rem;
@@ -145,9 +148,10 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
     .btn-edit {
-      background: linear-gradient(135deg, var(--primary-color) 0%, #4338ca 100%);
+      background: linear-gradient(135deg, var(--mint-green) 0%, #a3c9a5 100%);
       border: none;
-      color: white;
+      color: var(--dark-navy);
+      font-weight: 700;
     }
     .btn-delete {
       background: linear-gradient(135deg, var(--danger-color) 0%, #dc2626 100%);
