@@ -43,9 +43,6 @@ services:
     healthCheckPath: /
     envVars:
       - key: INVENTORY_SERVICE_URL
-        fromService:
-          type: web
-          name: inventory-service
-          property: host
+        sync: false
       - key: JAVA_OPTS
         value: -Xmx512m -Xms256m
