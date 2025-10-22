@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database (simulating Render's free tier)
+  postgres:
+    image: postgres:16-alpine
+    container_name: inventory-postgres
+    environment:
+      POSTGRES_DB: inventory_dbs
+      POSTGRES_USER: inventory_user
+      POSTGRES_PASSWORD: test_password_123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U inventory_user -d inventory_dbs"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API Service
+  inventory-service:
+    build:
+      context: .
+      dockerfile: inventory-service/Dockerfile
+    container_name: inventory-service
+    environment:
+      DATABASE_URL: jdbc:postgresql://postgres:5432/inventory_dbs
+      DB_USERNAME: inventory_user
+      DB_PASSWORD: test_password_123
+      DB_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+      SHOW_SQL: "true"
+      PORT: 8081
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # Frontend Web Service
+  web-service:
+    build:
+      context: .
+      dockerfile: web-service/Dockerfile
+    container_name: web-service
+    environment:
+      INVENTORY_SERVICE_URL: http://inventory-service:8081
+      PORT: 8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      - inventory-service
+
+volumes:
+  postgres_data:
+    driver: local

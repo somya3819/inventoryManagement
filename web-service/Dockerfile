@@ -1,15 +1,18 @@
 # Multi-stage build for smaller image size
 FROM maven:3.9-eclipse-temurin-17-alpine AS build
 
-WORKDIR /app
+WORKDIR /build
 
-# Copy parent pom and web-service
-COPY pom.xml /app/parent-pom.xml
-COPY web-service/pom.xml .
-COPY web-service/src ./src
+# Copy parent pom first
+COPY pom.xml .
 
-# Build the application (skip tests for faster build)
-RUN mvn clean package -DskipTests -f pom.xml
+# Copy both modules (Maven reactor needs to see all modules)
+COPY web-service/pom.xml ./web-service/
+COPY web-service/src ./web-service/src
+COPY inventory-service/pom.xml ./inventory-service/
+
+# Build only web-service (but Maven needs to see inventory-service pom)
+RUN mvn clean package -DskipTests -pl web-service -am
 
 # Runtime stage
 FROM eclipse-temurin:17-jre-alpine
@@ -17,7 +20,7 @@ FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
 # Copy the built jar from build stage
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /build/web-service/target/*.jar app.jar
 
 # Expose port (Render will set PORT env variable)
 EXPOSE 8080
