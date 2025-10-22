@@ -27,6 +27,10 @@
       margin-top: 2rem;
       margin-bottom: 2rem;
       overflow: hidden;
+      max-width: 1400px;
+    }
+    .container {
+      max-width: 1400px;
     }
     .header-section {
       background: linear-gradient(135deg, var(--dark-navy) 0%, #2a2d35 100%);
@@ -180,6 +184,59 @@
     .alert-custom i {
       font-size: 1.5rem;
     }
+    .stats-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 15px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: all 0.3s;
+    }
+    .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .stat-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      color: white;
+    }
+    .stat-icon.items {
+      background: linear-gradient(135deg, var(--mint-green) 0%, #a3c9a5 100%);
+      color: var(--dark-navy);
+    }
+    .stat-icon.quantity {
+      background: linear-gradient(135deg, var(--sage-blue) 0%, #96a6a4 100%);
+      color: var(--dark-navy);
+    }
+    .stat-icon.value {
+      background: linear-gradient(135deg, var(--golden-yellow) 0%, #b9a953 100%);
+      color: var(--dark-navy);
+    }
+    .stat-content h3 {
+      margin: 0;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--dark-navy);
+    }
+    .stat-content p {
+      margin: 0;
+      color: #6b7280;
+      font-size: 0.95rem;
+    }
     @media (max-width: 768px) {
       .header-section h1 {
         font-size: 1.75rem;
@@ -211,6 +268,39 @@
           <span th:text="${error}"></span>
         </div>
 
+        <!-- Statistics Section -->
+        <div class="stats-section" th:if="${!items.empty}">
+          <div class="stat-card">
+            <div class="stat-icon items">
+              <i class="bi bi-box-seam-fill"></i>
+            </div>
+            <div class="stat-content">
+              <h3 th:text="${#lists.size(items)}">0</h3>
+              <p>Total Items</p>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon quantity">
+              <i class="bi bi-boxes"></i>
+            </div>
+            <div class="stat-content">
+              <h3 th:text="${#aggregates.sum(items.![quantity])}">0</h3>
+              <p>Total Quantity</p>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon value">
+              <i class="bi bi-currency-dollar"></i>
+            </div>
+            <div class="stat-content">
+              <h3 th:text="'$' + ${#numbers.formatDecimal(#aggregates.sum(items.![price * quantity]), 1, 2)}">$0.00</h3>
+              <p>Total Inventory Value</p>
+            </div>
+          </div>
+        </div>
+
         <div class="action-bar">
           <a class="btn btn-add btn-custom" href="/web/items/create">
             <i class="bi bi-plus-circle-fill"></i>
@@ -224,6 +314,15 @@
             <i class="bi bi-search"></i>
             Search by ID
           </a>
+        </div>
+
+        <!-- All Items Section -->
+        <div th:if="${!items.empty}" style="margin-bottom: 1rem;">
+          <h2 style="color: var(--dark-navy); font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+            <i class="bi bi-list-ul"></i>
+            All Saved Items
+            <span style="background: var(--mint-green); color: var(--dark-navy); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.9rem; margin-left: 0.5rem;" th:text="${#lists.size(items)}">0</span>
+          </h2>
         </div>
 
         <div class="table-container">
